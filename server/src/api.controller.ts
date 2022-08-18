@@ -18,16 +18,14 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
       myFakeServerDatabase[i] = data;
 
       res.status(200).json(myFakeServerDatabase[i]);
-    } else {
-      //TODO if entity is same 204?
-      res.status(404);
+      return;
     }
   }
+  res.status(404).json("NOT FOUND");
 }
 
 export function deleteMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
-  // TODO body validation?
 
   //if ID exists
   for (let i = 0; i < myFakeServerDatabase.length; i++) {
@@ -36,10 +34,10 @@ export function deleteMeal(req: Request<{ id: string }>, res: Response) {
       myFakeServerDatabase.splice(i, 1);
 
       res.status(200).json(deletedData);
-    } else {
-      res.status(404);
+      return;
     }
   }
+  res.status(404).json("NOT FOUND");
 }
 
 export function getAllMeals(req: Request, res: Response) {
@@ -48,7 +46,7 @@ export function getAllMeals(req: Request, res: Response) {
 
 export const addMeal = (req: Request, res: Response) => {
   const data = req.body;
-  // TODO save
+  myFakeServerDatabase.push(data);
   res.status(201).json(data);
 };
 
