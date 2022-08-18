@@ -11,32 +11,27 @@ type MealDTO = {
   calories: number;
 };
 
-import { fsync, readFileSync, writeFileSync } from "fs";
+const dir = "../JsonSaveData.json";
+
 import { promises as fs } from "fs";
-import { json } from "stream/consumers";
-//var fs = require("fs");
 
 export let myFakeServerDatabase: Meal[];
 
-export function initalizeDB() {
-  myFakeServerDatabase = [
-    //TODO Make load from Json here insted?
-    { id: 0, name: "Kyckling gryta", protein: 40, calories: 1050 },
-    { id: 1, name: "Pew Pew", protein: 60, calories: 1200 },
-  ];
+export async function initalizeDB() {
+  let jsonString = (await fs.readFile(dir)).toString();
+  let data = JSON.parse(jsonString);
+  console.log(data);
+
+  myFakeServerDatabase = data;
+  console.log("DB loaded");
 }
 
 export async function saveDB() {
-  //TODO save to json localy
   const jsonData = JSON.stringify(myFakeServerDatabase);
-  console.log(jsonData);
-  const dir = "../JsonSaveData.json";
-
-  //fs.writeFileSync(dir, jsonData);
   await fs.writeFile(dir, jsonData);
+  console.log("DB saved");
 }
 
-// put DB here?
 //TODO this
 function createMeal(meal: MealDTO) {
   let uniqueIdMeal: Meal = {

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { myFakeServerDatabase } from "./Meal";
+import { myFakeServerDatabase, saveDB } from "./Meal";
 
 export function updateMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
@@ -13,6 +13,7 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
       myFakeServerDatabase[i] = data;
 
       res.status(200).json(myFakeServerDatabase[i]);
+      saveDB();
       return;
     }
   }
@@ -29,6 +30,7 @@ export function deleteMeal(req: Request<{ id: string }>, res: Response) {
       myFakeServerDatabase.splice(i, 1);
 
       res.status(200).json(deletedData);
+      saveDB();
       return;
     }
   }
@@ -42,6 +44,7 @@ export function getAllMeals(req: Request, res: Response) {
 export const addMeal = (req: Request, res: Response) => {
   const data = req.body;
   myFakeServerDatabase.push(data);
+  saveDB();
   res.status(201).json(data);
 };
 

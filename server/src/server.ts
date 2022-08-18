@@ -6,7 +6,6 @@ import { initalizeDB, saveDB } from "./Meal";
 import { getAllMeals, updateMeal, deleteMeal, addMeal } from "./api.controller";
 
 initalizeDB();
-saveDB();
 
 const app = express();
 app.use(express.json());
