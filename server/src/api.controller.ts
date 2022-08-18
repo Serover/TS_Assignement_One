@@ -37,6 +37,18 @@ export function deleteMeal(req: Request<{ id: string }>, res: Response) {
   res.status(404).json("NOT FOUND");
 }
 
+export function getASpecificMeal(req: Request<{ id: string }>, res: Response) {
+  const id: number = +req.params.id;
+
+  for (let i = 0; i < myFakeServerDatabase.length; i++) {
+    if (id === myFakeServerDatabase[i].id) {
+      res.status(200).json(myFakeServerDatabase[i]);
+      return;
+    }
+  }
+  res.status(404).json("NOT FOUND");
+}
+
 export function getAllMeals(req: Request, res: Response) {
   res.status(200).json(myFakeServerDatabase);
 }

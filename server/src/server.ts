@@ -3,7 +3,13 @@ const baseApiUrl: string = "/api/v1/";
 
 import express, { Request } from "express";
 import { initalizeDB, saveDB } from "./Meal";
-import { getAllMeals, updateMeal, deleteMeal, addMeal } from "./api.controller";
+import {
+  getAllMeals,
+  updateMeal,
+  deleteMeal,
+  addMeal,
+  getASpecificMeal,
+} from "./api.controller";
 
 initalizeDB();
 
@@ -11,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 app.get(baseApiUrl, getAllMeals);
-// app.get(baseApiUrl + ":id", getAllMeals) or Specific func?
+app.get(baseApiUrl + ":id", getASpecificMeal);
 app.post(baseApiUrl, addMeal);
 app.put(baseApiUrl + ":id", updateMeal);
 app.delete(baseApiUrl + ":id", deleteMeal);

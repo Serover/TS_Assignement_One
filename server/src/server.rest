@@ -25,3 +25,6 @@ Content-Type: application/json
 
 ### Delete a specified object
 DELETE  http://localhost:3000/api/v1/1
+
+### GET a specified object
+GET   http://localhost:3000/api/v1/1
