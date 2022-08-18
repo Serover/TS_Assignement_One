@@ -1,22 +1,25 @@
 const portNumb: number = 3000;
 
-import express from "express";
+import express, { Request } from "express";
+import { type } from "os";
 const app = express();
 
-let myFakeObject: {
+type Meal = {
   id: number;
   name: string;
-  age: number;
-  birthday: number;
-}[] = [
+  protein: number;
+  calories: number;
+};
+
+let myFakeServerDatabase: Meal[] = [
   //TODO Make load from Json here insted?
-  { id: 0, name: "Available", age: 20, birthday: 1990 },
-  { id: 1, name: "Ready", age: 20, birthday: 1990 },
+  { id: 0, name: "Kyckling gryta", protein: 40, calories: 1050 },
+  { id: 1, name: "Pew Pew", protein: 60, calories: 1200 },
 ];
 
 app.get("/", (req, res) => {
   console.log("Get Called");
-  res.status(200).json(myFakeObject);
+  res.status(200).json(myFakeServerDatabase);
 });
 
 app.post("/", (req, res) => {
@@ -24,11 +27,18 @@ app.post("/", (req, res) => {
 });
 
 app.put("/", (req, res) => {
-  console.log("Put Called");
+  //if ID exists
+  //code 200, update + return object
+  // else
+  // code 404
 });
 
-app.delete("/", (req, res) => {
-  console.log("Delete Called");
+app.delete("/", (req: Request<{ id: string }>, res) => {
+  //if ID exists
+  //code 200, return object
+  // delete object
+  // else
+  // code 404
 });
 
 app.listen(portNumb, () =>
