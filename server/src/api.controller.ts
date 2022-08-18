@@ -19,8 +19,8 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
 
       res.status(200).json(myFakeServerDatabase[i]);
     } else {
-      // Some1 on the interet said 204 > 404
-      res.status(204);
+      //TODO if entity is same 204?
+      res.status(404);
     }
   }
 }
@@ -37,8 +37,7 @@ export function deleteMeal(req: Request<{ id: string }>, res: Response) {
 
       res.status(200).json(deletedData);
     } else {
-      // Some1 on the interet said 204 > 404
-      res.status(204);
+      res.status(404);
     }
   }
 }
@@ -49,6 +48,9 @@ export function getAllMeals(req: Request, res: Response) {
 
 export const addMeal = (req: Request, res: Response) => {
   const data = req.body;
-  // TODO: save
+  // TODO save
   res.status(201).json(data);
 };
+
+//TODO?
+// middlelayer that auto saves in json??
