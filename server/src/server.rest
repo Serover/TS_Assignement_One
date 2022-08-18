@@ -1,1 +1,27 @@
+### Get all objects
 GET http://localhost:3000/
+
+### Create a new object
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+  "id": "5",
+  "name": "oba",
+  "protein": 111,
+  "calories": 111
+}
+
+### Create a new object
+PUT  http://localhost:3000/1
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "oba",
+  "protein": 222,
+  "calories": 222
+}
+
+### Create a new object
+DELETE  http://localhost:3000/1
