@@ -1,10 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-
-let myFakeServerDatabase: Meal[] = [
-  //TODO Make load from Json here insted?
-  { id: 0, name: "Kyckling gryta", protein: 40, calories: 1050 },
-  { id: 1, name: "Pew Pew", protein: 60, calories: 1200 },
-];
+import { myFakeServerDatabase } from "./Meal";
 
 export function updateMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
