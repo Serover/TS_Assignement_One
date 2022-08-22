@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { myFakeServerDatabase, saveDB } from "./meal";
+import { createMeal, myFakeServerDatabase, saveDB } from "./meal";
 
 export function updateMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
@@ -55,10 +55,9 @@ export function getAllMeals(req: Request, res: Response) {
 
 export const addMeal = (req: Request, res: Response) => {
   const data = req.body;
-  myFakeServerDatabase.push(data);
-  saveDB();
-  res.status(201).json(data);
-};
 
-//TODO?
-// middlelayer that auto saves in json??
+  let newmeal = createMeal(data);
+  myFakeServerDatabase.push(newmeal);
+  saveDB();
+  res.status(201).json(newmeal);
+};

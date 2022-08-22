@@ -2,29 +2,28 @@
 GET http://localhost:3000/api/
 
 ### Create a new object
-POST http://localhost:3000/api/v1/
+POST http://localhost:3000/api/
 Content-Type: application/json
 
 {
-  "id": 4,
-  "name": "oba",
+  "name": "obababab",
   "protein": 111,
   "calories": 111
 }
 
 ### Update a object
-PUT  http://localhost:3000/api/v1/1
+PUT  http://localhost:3000/api/1
 Content-Type: application/json
 
 {
   "id": 1,
-  "name": "oba",
+  "name": "obababaddddd",
   "protein": 222,
   "calories": 222
 }
 
 ### Delete a specified object
-DELETE  http://localhost:3000/api/v1/1
+DELETE  http://localhost:3000/api/1
 
 ### GET a specified object
-GET   http://localhost:3000/api/v1/1
+GET   http://localhost:3000/api/1

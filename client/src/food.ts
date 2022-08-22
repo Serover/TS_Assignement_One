@@ -1,5 +1,13 @@
-type Meal = {
+import { openForm } from "./form";
+
+export type Meal = {
   id: number;
+  name: string;
+  protein: number;
+  calories: number;
+};
+
+export type MealDTO = {
   name: string;
   protein: number;
   calories: number;
@@ -32,11 +40,11 @@ export function generateFoodUI() {
     foodStats.classList.add("foodStats");
 
     const name = document.createElement("i");
-    name.innerHTML = allMeals[i].name;
+    name.innerHTML = "name:" + allMeals[i].name;
     const protein = document.createElement("i");
-    protein.innerHTML = allMeals[i].protein.toString();
+    protein.innerHTML = "protein:" + allMeals[i].protein.toString();
     const calories = document.createElement("i");
-    calories.innerHTML = allMeals[i].calories.toString();
+    calories.innerHTML = "calories:" + allMeals[i].calories.toString();
 
     foodStats.append(name);
     foodStats.append(protein);
@@ -49,7 +57,7 @@ export function generateFoodUI() {
     const editButton = document.createElement("i");
     editButton.classList.add("far");
     editButton.classList.add("fa-edit");
-    editButton.addEventListener("click", () => editMeal(allMeals[i]));
+    editButton.addEventListener("click", () => openForm(allMeals[i]));
 
     const removeButton = document.createElement("i");
     removeButton.classList.add("fa-regular");
@@ -67,24 +75,42 @@ export function generateFoodUI() {
   }
 }
 
-async function createMeal(meal: Meal) {}
-
-async function editMeal(meal: Meal) {
-  const response = await fetch("/api" + meal.id, {
-    method: "DELETE",
+export async function createMeal(meal: MealDTO) {
+  const response = await fetch("/api/", {
+    method: "POST",
+    headers: { Accept: "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify(meal),
   });
 
   if (response.ok) {
-    console.log("DELETED OBJECT");
+    console.log("CREATED OBJECT");
+    window.location.reload();
   }
 }
 
-async function removeMeal(meal: Meal) {
-  const response = await fetch("/api" + meal.id, {
+export async function editMeal(meal: Meal) {
+  const response = await fetch("/api/" + meal.id, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(meal),
+  });
+
+  if (response.ok) {
+    console.log("EDITED OBJECT");
+    window.location.reload();
+  }
+}
+
+export async function removeMeal(meal: Meal) {
+  const response = await fetch("/api/" + meal.id, {
     method: "DELETE",
   });
 
   if (response.ok) {
     console.log("DELETED OBJECT");
+    window.location.reload();
   }
 }

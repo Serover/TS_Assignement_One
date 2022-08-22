@@ -33,7 +33,7 @@ export async function saveDB() {
 }
 
 //TODO this
-function createMeal(meal: MealDTO) {
+export function createMeal(meal: MealDTO) {
   let uniqueIdMeal: Meal = {
     id: 0,
     name: meal.name,

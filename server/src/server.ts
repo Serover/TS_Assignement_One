@@ -17,10 +17,10 @@ const app = express();
 app.use(express.json());
 
 app.get(baseApiUrl, getAllMeals);
-app.get(baseApiUrl + ":id", getASpecificMeal);
+app.get(baseApiUrl + "/:id", getASpecificMeal);
 app.post(baseApiUrl, addMeal);
-app.put(baseApiUrl + ":id", updateMeal);
-app.delete(baseApiUrl + ":id", deleteMeal);
+app.put(baseApiUrl + "/:id", updateMeal);
+app.delete(baseApiUrl + "/:id", deleteMeal);
 
 app.listen(portNumb, () =>
   console.log("Running on: http://localhost:" + portNumb)
