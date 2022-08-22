@@ -16,7 +16,7 @@ export function openForm(meal?: Meal) {
 
   const main = document.querySelector(".content-container");
 
-  const form = doc?.firstElementChild?.nextElementSibling as HTMLFormElement;
+  const form = doc?.firstElementChild as HTMLFormElement;
   const elements = form?.elements;
 
   // is Add
