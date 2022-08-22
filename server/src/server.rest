@@ -1,12 +1,12 @@
 ### Get all objects
-GET http://localhost:3000/api/v1/
+GET http://localhost:3000/api/
 
 ### Create a new object
 POST http://localhost:3000/api/v1/
 Content-Type: application/json
 
 {
-  "id": 5,
+  "id": 4,
   "name": "oba",
   "protein": 111,
   "calories": 111

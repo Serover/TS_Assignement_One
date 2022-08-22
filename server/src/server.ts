@@ -1,8 +1,8 @@
 const portNumb: number = 3000;
-const baseApiUrl: string = "/api/v1/";
+const baseApiUrl: string = "/api";
 
 import express, { Request } from "express";
-import { initalizeDB } from "./Meal";
+import { initalizeDB } from "./meal";
 import {
   getAllMeals,
   updateMeal,

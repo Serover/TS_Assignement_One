@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { myFakeServerDatabase, saveDB } from "./Meal";
+import { myFakeServerDatabase, saveDB } from "./meal";
 
 export function updateMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
