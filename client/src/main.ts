@@ -1,8 +1,9 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import "./style.css";
+import typescriptLogo from "./typescript.svg";
+import { setupCounter } from "./counter";
+import { generateFoodUI } from "./food";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -18,6 +19,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       Click on the Vite and TypeScript logos to learn more
     </p>
   </div>
-`
+`;
+// let item = document.createElement("div");
+// item.classList.add("Oba Doba");
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+generateFoodUI();
+
+setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
