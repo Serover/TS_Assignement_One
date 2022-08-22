@@ -40,7 +40,10 @@ export function createMeal(meal: MealDTO) {
     protein: meal.protein,
     calories: meal.calories,
   };
-  uniqueIdMeal.id = myFakeServerDatabase[myFakeServerDatabase.length--].id++;
+  // Very naive unique ID but works due to small reasons.
+  let numb = myFakeServerDatabase[myFakeServerDatabase.length - 1].id;
+  numb++;
+  uniqueIdMeal.id = numb;
 
   return uniqueIdMeal;
 }
