@@ -1,4 +1,4 @@
-# FantastiCal
+# TS_Assignement 3 : Rest-API
 
 ## Erik Jakobsson
 
@@ -38,3 +38,5 @@ Have node
 
 **ÄNDRINGAR/AVGRÄNSNINGAR**
 TODO
+Det finns typ ingen felhantering alls (inget krav :) )
+Det finns typ INGEN css (inget krav (: )
