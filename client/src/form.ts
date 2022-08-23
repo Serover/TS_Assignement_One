@@ -84,10 +84,8 @@ export async function handleSearchFormSubmit(e: any) {
 
   const formData = new FormData(e.target);
   const formProps = Object.fromEntries(formData);
-
   const id: number = formProps.id;
 
-  //TODO make array
   let fetchFood: Meal = await getMeal(id);
   console.log(fetchFood);
 

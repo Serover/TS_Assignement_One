@@ -9,7 +9,6 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
   //if ID exists
   for (let i = 0; i < myFakeServerDatabase.length; i++) {
     if (id === myFakeServerDatabase[i].id) {
-      //TODO async + save to local etc etc
       myFakeServerDatabase[i] = data;
 
       res.status(200).json(myFakeServerDatabase[i]);
