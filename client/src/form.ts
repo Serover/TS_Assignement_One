@@ -1,4 +1,18 @@
-import { Meal, MealDTO, createMeal, editMeal } from "./food";
+import {
+  Meal,
+  MealDTO,
+  createMeal,
+  editMeal,
+  generateFoodUI,
+  cleanFoodUI,
+  getMeal,
+} from "./food";
+
+// interface formElement extends HTMLFormElement {
+//   name?: string;
+//   protein?: number;
+//   calories?: number;
+// }
 
 export function closeForm() {
   const form = document.querySelector<HTMLElement>(".form-popup");
@@ -7,6 +21,9 @@ export function closeForm() {
 
 let alterId: number;
 export const toDoForm = document.querySelector<HTMLFormElement>("#todo-form");
+
+export const searchForm =
+  document.querySelector<HTMLFormElement>("#search-form");
 
 // OPTIONAL PARAMETER
 export function openForm(meal?: Meal) {
@@ -17,7 +34,8 @@ export function openForm(meal?: Meal) {
   const main = document.querySelector(".content-container");
 
   const form = doc?.firstElementChild as HTMLFormElement;
-  const elements = form?.elements;
+  var elements = form.elements;
+  // var elements: formElement = <formElement>form.elements;
 
   // is Add
   if (meal == null) {
@@ -25,9 +43,13 @@ export function openForm(meal?: Meal) {
     console.log("ADDING");
     toDoForm!.onsubmit = handleFormSubmit;
 
-    elements["name"].value = null;
-    elements["protein"].value = null;
-    elements["calories"].value = null;
+    elements["_name"] = undefined;
+    elements["protein"] = undefined;
+    elements["calories"] = undefined;
+
+    // elements._name.value = undefined;
+    // elements["protein"].value = undefined;
+    // elements["calories"].value = undefined;
   }
   // is Edit
   else {
@@ -40,6 +62,10 @@ export function openForm(meal?: Meal) {
     elements["name"].value = meal.name;
     elements["protein"].value = meal.protein;
     elements["calories"].value = meal.calories;
+
+    // elements["_name"] = meal.name;
+    // elements["protein"] = meal.protein;
+    // elements["calories"] = meal.protein;
   }
 }
 
@@ -52,6 +78,31 @@ const closeFormButton = document.querySelector(".closeTodoForm");
 closeFormButton?.addEventListener("click", () => {
   closeForm();
 });
+
+export async function handleSearchFormSubmit(e: any) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+
+  const id: number = formProps.id;
+
+  //TODO make array
+  let fetchFood: Meal = await getMeal(id);
+  console.log(fetchFood);
+
+  let fetchFoodAsArray: Meal[] = [
+    {
+      id: fetchFood.id,
+      name: fetchFood.name,
+      protein: fetchFood.protein,
+      calories: fetchFood.calories,
+    },
+  ];
+
+  cleanFoodUI();
+  generateFoodUI(fetchFoodAsArray);
+}
 
 export function handleFormSubmit(e: any) {
   e.preventDefault();

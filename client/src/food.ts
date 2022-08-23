@@ -13,24 +13,22 @@ export type MealDTO = {
   calories: number;
 };
 
-const api_URL = "3000";
-const apiV_Url = "api/";
+const apiV_Url = "/api/";
 
 let allMeals: Meal[];
 
-export async function fetchData() {
-  //TODO error handling
-  console.log("FETCHING DATA");
-  const response = await fetch("/api");
-  const jsonData = await response.json();
-  console.log(jsonData);
-  allMeals = jsonData;
+export function cleanFoodUI() {
+  console.log("CLEANING");
+  const allExistingMeals = document.querySelectorAll(".meal");
+  allExistingMeals.forEach((meal) => {
+    meal.remove();
+  });
 }
 
-export function generateFoodUI() {
+export function generateFoodUI(_allMeals: Meal[] = allMeals) {
   console.log("FOOD UI GENERATING");
   //TODO error handling
-  for (let i = 0; i < allMeals.length; i++) {
+  for (let i = 0; i < _allMeals.length; i++) {
     const app = document.querySelector<HTMLDivElement>("#app");
 
     const foodDiv = document.createElement("div");
@@ -40,11 +38,11 @@ export function generateFoodUI() {
     foodStats.classList.add("foodStats");
 
     const name = document.createElement("i");
-    name.innerHTML = "name:" + allMeals[i].name;
+    name.innerHTML = "name:" + _allMeals[i].name;
     const protein = document.createElement("i");
-    protein.innerHTML = "protein:" + allMeals[i].protein.toString();
+    protein.innerHTML = "protein:" + _allMeals[i].protein.toString();
     const calories = document.createElement("i");
-    calories.innerHTML = "calories:" + allMeals[i].calories.toString();
+    calories.innerHTML = "calories:" + _allMeals[i].calories.toString();
 
     foodStats.append(name);
     foodStats.append(protein);
@@ -57,12 +55,12 @@ export function generateFoodUI() {
     const editButton = document.createElement("i");
     editButton.classList.add("far");
     editButton.classList.add("fa-edit");
-    editButton.addEventListener("click", () => openForm(allMeals[i]));
+    editButton.addEventListener("click", () => openForm(_allMeals[i]));
 
     const removeButton = document.createElement("i");
     removeButton.classList.add("fa-regular");
     removeButton.classList.add("fa-trash-can");
-    removeButton.addEventListener("click", () => removeMeal(allMeals[i]));
+    removeButton.addEventListener("click", () => removeMeal(_allMeals[i]));
     //---------- buttons end --------------------
 
     buttons.append(editButton);
@@ -76,7 +74,7 @@ export function generateFoodUI() {
 }
 
 export async function createMeal(meal: MealDTO) {
-  const response = await fetch("/api/", {
+  const response = await fetch(apiV_Url, {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(meal),
@@ -87,9 +85,17 @@ export async function createMeal(meal: MealDTO) {
     window.location.reload();
   }
 }
+export async function fetchAllMeals() {
+  //TODO error handling
+  console.log("FETCHING DATA");
+  const response = await fetch(apiV_Url);
+  const jsonData = await response.json();
+  console.log(jsonData);
+  allMeals = jsonData;
+}
 
 export async function editMeal(meal: Meal) {
-  const response = await fetch("/api/" + meal.id, {
+  const response = await fetch(apiV_Url + meal.id, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -105,7 +111,7 @@ export async function editMeal(meal: Meal) {
 }
 
 export async function removeMeal(meal: Meal) {
-  const response = await fetch("/api/" + meal.id, {
+  const response = await fetch(apiV_Url + meal.id, {
     method: "DELETE",
   });
 
@@ -113,4 +119,16 @@ export async function removeMeal(meal: Meal) {
     console.log("DELETED OBJECT");
     window.location.reload();
   }
+}
+
+export async function getMeal(id: number) {
+  console.log("numb");
+  console.log(id);
+
+  const response = await fetch(apiV_Url + id);
+  const jsonData = await response.json();
+  let returnMeal: Meal;
+  returnMeal = jsonData;
+
+  return returnMeal;
 }

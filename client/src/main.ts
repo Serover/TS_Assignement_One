@@ -1,10 +1,16 @@
 import "./style.css";
 
-import { fetchData, generateFoodUI, editMeal, createMeal } from "./food";
-import { handleFormSubmit, toDoForm, openForm } from "./form";
+import { fetchAllMeals, generateFoodUI, editMeal, createMeal } from "./food";
+import {
+  handleFormSubmit,
+  toDoForm,
+  openForm,
+  searchForm,
+  handleSearchFormSubmit,
+} from "./form";
 
 async function main() {
-  await fetchData();
+  await fetchAllMeals();
   await generateFoodUI();
   bindEventHandeler();
   bindAddMealButton();
@@ -12,6 +18,7 @@ async function main() {
 
 function bindEventHandeler() {
   toDoForm!.onsubmit = handleFormSubmit;
+  searchForm!.onsubmit = handleSearchFormSubmit;
 }
 
 function bindAddMealButton() {
