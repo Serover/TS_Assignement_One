@@ -8,11 +8,11 @@ import {
   getMeal,
 } from "./food";
 
-// interface formElement extends HTMLFormElement {
-//   name?: string;
-//   protein?: number;
-//   calories?: number;
-// }
+interface formElement extends HTMLCollection {
+  name?: HTMLInputElement;
+  protein?: HTMLInputElement;
+  calories?: HTMLInputElement;
+}
 
 export function closeForm() {
   const form = document.querySelector<HTMLElement>(".form-popup");
@@ -34,8 +34,8 @@ export function openForm(meal?: Meal) {
   const main = document.querySelector(".content-container");
 
   const form = doc?.firstElementChild as HTMLFormElement;
-  var elements = form.elements;
-  // var elements: formElement = <formElement>form.elements;
+  //var elements = form.elements;
+  var elements: formElement = <formElement>form.elements;
 
   // is Add
   if (meal == null) {
@@ -43,13 +43,9 @@ export function openForm(meal?: Meal) {
     console.log("ADDING");
     toDoForm!.onsubmit = handleFormSubmit;
 
-    elements["_name"] = undefined;
-    elements["protein"] = undefined;
-    elements["calories"] = undefined;
-
-    // elements._name.value = undefined;
-    // elements["protein"].value = undefined;
-    // elements["calories"].value = undefined;
+    elements["name"]!.value = "";
+    elements["protein"]!.value = "";
+    elements["calories"]!.value = "";
   }
   // is Edit
   else {
@@ -59,9 +55,9 @@ export function openForm(meal?: Meal) {
     toDoForm!.onsubmit = handleEditFormSubmit;
 
     alterId = meal.id;
-    elements["name"].value = meal.name;
-    elements["protein"].value = meal.protein;
-    elements["calories"].value = meal.calories;
+    elements["name"]!.value = meal.name;
+    elements["protein"]!.value = meal.protein.toString();
+    elements["calories"]!.value = meal.calories.toString();
 
     // elements["_name"] = meal.name;
     // elements["protein"] = meal.protein;
@@ -79,14 +75,15 @@ closeFormButton?.addEventListener("click", () => {
   closeForm();
 });
 
-export async function handleSearchFormSubmit(e: any) {
+export async function handleSearchFormSubmit(e: SubmitEvent) {
   e.preventDefault();
 
-  const formData = new FormData(e.target);
-  const formProps = Object.fromEntries(formData);
-  const id: number = formProps.id;
+  let formData: FormData = new FormData(e.target as HTMLFormElement);
+  const formProps = Object.fromEntries(formData.entries());
+  const id = formProps.id;
+  const numberId: number = +id.toString();
 
-  let fetchFood: Meal = await getMeal(id);
+  let fetchFood: Meal = await getMeal(numberId);
   console.log(fetchFood);
 
   let fetchFoodAsArray: Meal[] = [
@@ -102,27 +99,27 @@ export async function handleSearchFormSubmit(e: any) {
   generateFoodUI(fetchFoodAsArray);
 }
 
-export function handleFormSubmit(e: any) {
+export function handleFormSubmit(e: SubmitEvent) {
   e.preventDefault();
   console.log("SUBMIT  RUN");
 
-  const formData = new FormData(e.target);
+  const formData = new FormData(e.target as HTMLFormElement);
   const formProps = Object.fromEntries(formData);
 
   let newMeal: MealDTO = {
-    name: formProps.name,
-    protein: formProps.protein,
-    calories: formProps.calories,
+    name: formProps.name.toString(),
+    protein: +formProps.protein.toString(),
+    calories: +formProps.calories.toString(),
   };
 
   createMeal(newMeal);
 }
 
-export function handleEditFormSubmit(e: any) {
+export function handleEditFormSubmit(e: SubmitEvent) {
   e.preventDefault();
   console.log("EDIT FORMR RUNNN");
 
-  const formData = new FormData(e.target);
+  const formData = new FormData(e.target as HTMLFormElement);
   const formProps = Object.fromEntries(formData);
 
   console.log("formprops");
@@ -130,9 +127,9 @@ export function handleEditFormSubmit(e: any) {
 
   let newMeal: Meal = {
     id: alterId,
-    name: formProps.name,
-    protein: formProps.protein,
-    calories: formProps.calories,
+    name: formProps.name.toString(),
+    protein: +formProps.protein.toString(),
+    calories: +formProps.calories.toString(),
   };
 
   editMeal(newMeal);
