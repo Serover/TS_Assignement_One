@@ -7,23 +7,22 @@ Content-Type: application/json
 
 {
   "name": "obababab",
-  "protein": 111,
+  "protein": 11 ,
   "calories": 111
 }
 
 ### Update a object
-PUT  http://localhost:3000/api/1
+PUT  http://localhost:3000/api/16
 Content-Type: application/json
 
 {
-  "id": 1,
   "name": "obababaddddd",
-  "protein": 222,
+  "protein": 200,
   "calories": 222
 }
 
 ### Delete a specified object
-DELETE  http://localhost:3000/api/1
+DELETE  http://localhost:3000/api/0
 
 ### GET a specified object
 GET   http://localhost:3000/api/1
