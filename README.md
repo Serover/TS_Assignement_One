@@ -37,7 +37,7 @@ Have node
 - [x] 5. Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
 
 **ÄNDRINGAR/AVGRÄNSNINGAR**
-Det finns typ ingen felhantering alls (inget krav :) )
+Det finns delvis felhantering och data validering vid input, men klippt lite hörnen här å där.
 Det finns typ INGEN css (inget krav (: )
 
 Det finns inget flow i navigeringen av frontended ( inget krav 🙃)
