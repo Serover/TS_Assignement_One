@@ -39,5 +39,6 @@ Have node
 **ÄNDRINGAR/AVGRÄNSNINGAR**
 Det finns typ ingen felhantering alls (inget krav :) )
 Det finns typ INGEN css (inget krav (: )
+
 Det finns inget flow i navigeringen av frontended ( inget krav 🙃)
-Det finns fel i koden men programmet fungerar ändå (idk? 😎)
+(Mer specifikt, man söker på ID, men det finns inget sätt att ta reda på vad för Id vad för maträtt har och dom har inte logiska IDn pga jag gjorde en väldigt lazy unique ID implementation)
