@@ -11,25 +11,21 @@ type MealDTO = {
   calories: number;
 };
 
-const dir = "../JsonSaveData.json";
-
 import { promises as fs } from "fs";
 
 export let myFakeServerDatabase: Meal[];
+const dir = "../JsonSaveData.json";
 
 export async function initalizeDB() {
   let jsonString = (await fs.readFile(dir)).toString();
   let data = JSON.parse(jsonString);
-  console.log(data);
 
   myFakeServerDatabase = data;
-  console.log("DB loaded");
 }
 
 export async function saveDB() {
   const jsonData = JSON.stringify(myFakeServerDatabase);
   await fs.writeFile(dir, jsonData);
-  console.log("DB saved");
 }
 
 export function createMeal(meal: MealDTO) {

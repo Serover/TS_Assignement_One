@@ -14,11 +14,9 @@ export type MealDTO = {
 };
 
 const apiV_Url = "/api/";
-
 let allMeals: Meal[];
 
 export function cleanFoodUI() {
-  console.log("CLEANING");
   const allExistingMeals = document.querySelectorAll(".meal");
   allExistingMeals.forEach((meal) => {
     meal.remove();
@@ -26,8 +24,9 @@ export function cleanFoodUI() {
 }
 
 export function generateFoodUI(_allMeals: Meal[] = allMeals) {
-  console.log("FOOD UI GENERATING");
-  //TODO error handling
+  //TODO error handling (should be elsewere, meals sent in here should be correct)
+
+  //TODO cleanup name in #html
   for (let i = 0; i < _allMeals.length; i++) {
     const app = document.querySelector<HTMLDivElement>("#app");
 
@@ -81,16 +80,14 @@ export async function createMeal(meal: MealDTO) {
   });
 
   if (response.ok) {
-    console.log("CREATED OBJECT");
+    //Option Clean -> Fetch -> Generate again
     window.location.reload();
   }
 }
 export async function fetchAllMeals() {
   //TODO error handling
-  console.log("FETCHING DATA");
   const response = await fetch(apiV_Url);
   const jsonData = await response.json();
-  console.log(jsonData);
   allMeals = jsonData;
 }
 
@@ -105,7 +102,6 @@ export async function editMeal(meal: Meal) {
   });
 
   if (response.ok) {
-    console.log("EDITED OBJECT");
     window.location.reload();
   }
 }
@@ -116,19 +112,14 @@ export async function removeMeal(meal: Meal) {
   });
 
   if (response.ok) {
-    console.log("DELETED OBJECT");
     window.location.reload();
   }
 }
 
 export async function getMeal(id: number) {
-  console.log("numb");
-  console.log(id);
-
   const response = await fetch(apiV_Url + id);
   const jsonData = await response.json();
-  let returnMeal: Meal;
-  returnMeal = jsonData;
+  const returnMeal: Meal = jsonData;
 
   return returnMeal;
 }

@@ -29,3 +29,7 @@ function bindAddMealButton() {
 }
 
 main();
+
+//TODO, cleanup comments
+//TODO fix naming in html, aka todo -> search / meal
+//TODO error handling??
