@@ -10,10 +10,9 @@ import {
 export function updateMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
 
-  // TODO body validation?
   const data = req.body;
-
   const valiRes = mealValidation(data);
+
   if (valiRes[0] == false) {
     res.status(valiRes[1]!).json(valiRes[2]);
     return;

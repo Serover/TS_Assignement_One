@@ -1,9 +1,12 @@
 # TS_Assignement 3 : Rest-API
 
+https://github.com/Serover/TS_Assignement_One
+
 ## Erik Jakobsson
 
 **How to run**
-Have node
+
+- Have node
 
 #Client
 
@@ -36,11 +39,12 @@ Have node
      presentera datan, redigeringsformulär skall fyllas i med befintlig information.
 - [x] 5. Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
 
-**ÄNDRINGAR/AVGRÄNSNINGAR**
+**KOMMENTARER/AVGRÄNSNINGAR**
 Det finns delvis felhantering och data validering vid input, men klippt lite hörnen här å där.
 Det finns typ INGEN css (inget krav (: )
 
 Lazy updatering av sidan (reloadar bara ist för att rita ut contentet / updatera contentet live) obvs sämre
+har t.o.m funktionerna för att göra det lätt x). (Clean + Render)
 
 Det finns inget flow i navigeringen av frontended ( inget krav 🙃)
-(Mer specifikt, man söker på ID, men det finns inget sätt att ta reda på vad för Id vad för maträtt har och dom har inte logiska IDn pga jag gjorde en väldigt lazy unique ID implementation)
+(Mer specifikt, man söker på ID, men det finns inget sätt att ta reda på vad för Id vad för maträtt har och dom har inte logiska IDn pga jag gjorde en väldigt lazy unique ID implementation + inget sätt att ta sig tillbaka förutom att ladda om sidan)
