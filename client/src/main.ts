@@ -3,7 +3,7 @@ import "./style.css";
 import { fetchAllMeals, generateFoodUI } from "./food";
 import {
   handleFormSubmit,
-  toDoForm,
+  mealForm,
   openForm,
   searchForm,
   handleSearchFormSubmit,
@@ -17,7 +17,7 @@ async function main() {
 }
 
 function bindEventHandeler() {
-  toDoForm!.onsubmit = handleFormSubmit;
+  mealForm!.onsubmit = handleFormSubmit;
   searchForm!.onsubmit = handleSearchFormSubmit;
 }
 
@@ -29,5 +29,3 @@ function bindAddMealButton() {
 }
 
 main();
-
-//TODO fix naming in html, aka todo -> search / meal

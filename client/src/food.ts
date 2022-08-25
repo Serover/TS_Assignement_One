@@ -23,10 +23,8 @@ export function cleanFoodUI() {
   });
 }
 
+//error handling (should be elsewere, meals sent in here should be correct)
 export function generateFoodUI(_allMeals: Meal[] = allMeals) {
-  //TODO error handling (should be elsewere, meals sent in here should be correct)
-
-  //TODO cleanup name in #html
   for (let i = 0; i < _allMeals.length; i++) {
     const app = document.querySelector<HTMLDivElement>("#app");
 
@@ -72,6 +70,13 @@ export function generateFoodUI(_allMeals: Meal[] = allMeals) {
   }
 }
 
+export async function fetchAllMeals() {
+  const response = await fetch(apiV_Url);
+  const jsonData = await response.json();
+  //TODO does typegaurd work here?
+  allMeals = jsonData;
+}
+
 export async function createMeal(meal: MealDTO) {
   const response = await fetch(apiV_Url, {
     method: "POST",
@@ -83,12 +88,6 @@ export async function createMeal(meal: MealDTO) {
     //Option Clean -> Fetch -> Generate again
     window.location.reload();
   }
-}
-export async function fetchAllMeals() {
-  //TODO error handling
-  const response = await fetch(apiV_Url);
-  const jsonData = await response.json();
-  allMeals = jsonData;
 }
 
 export async function editMeal(meal: Meal) {

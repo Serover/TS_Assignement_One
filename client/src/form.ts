@@ -14,31 +14,33 @@ interface formElement extends HTMLCollection {
   calories?: HTMLInputElement;
 }
 
+// --------- IMPORTANT CONSTANT ---------
 let alterId: number;
-export const toDoForm = document.querySelector<HTMLFormElement>("#todo-form");
+export const mealForm = document.querySelector<HTMLFormElement>("#meal-form");
 export const searchForm =
   document.querySelector<HTMLFormElement>("#search-form");
+// --------- IMPORTANT END  --------------
 
 export function closeForm() {
   const form = document.querySelector<HTMLElement>(".form-popup");
   form!.style.display = "none";
 }
+
 // OPTIONAL PARAMETER
 // If open with no meal -> Create new meal
 // If open with meal -> Edit meal
 export function openForm(meal?: Meal) {
-  const submitFormButton = document.querySelector<HTMLElement>(".submitTodo");
+  const submitFormButton = document.querySelector<HTMLElement>(".submitMeal");
   const doc = document.querySelector<HTMLElement>(".form-popup");
   doc!.style.display = "block";
 
-  //const main = document.querySelector(".content-container");
   const form = doc?.firstElementChild as HTMLFormElement;
   var elements: formElement = <formElement>form.elements;
 
   // is Add Meal
   if (meal == null) {
     submitFormButton!.innerHTML = "Submit"; // Cosmetic
-    toDoForm!.onsubmit = handleFormSubmit;
+    mealForm!.onsubmit = handleFormSubmit;
 
     elements["name"]!.value = "";
     elements["protein"]!.value = "";
@@ -47,8 +49,7 @@ export function openForm(meal?: Meal) {
   // is Edit Meal
   else {
     submitFormButton!.innerHTML = "Save"; // Cosmetic
-    // Set values to prev values
-    toDoForm!.onsubmit = handleEditFormSubmit;
+    mealForm!.onsubmit = handleEditFormSubmit;
 
     alterId = meal.id;
     elements["name"]!.value = meal.name;
@@ -62,15 +63,13 @@ openFormButton?.addEventListener("click", () => {
   openForm();
 });
 
-const closeFormButton = document.querySelector(".closeTodoForm");
+const closeFormButton = document.querySelector(".closeMealForm");
 closeFormButton?.addEventListener("click", () => {
   closeForm();
 });
 
 export async function handleSearchFormSubmit(e: SubmitEvent) {
-  //TODO error handling + feedback if no response
   e.preventDefault();
-
   cleanFoodUI();
 
   let formData: FormData = new FormData(e.target as HTMLFormElement);
@@ -79,6 +78,8 @@ export async function handleSearchFormSubmit(e: SubmitEvent) {
   const numberId: number = +id.toString();
 
   let fetchFood: Meal = await getMeal(numberId);
+
+  // Surley there's a better way to do it?
   let fetchFoodAsArray: Meal[] = [
     {
       id: fetchFood.id,
