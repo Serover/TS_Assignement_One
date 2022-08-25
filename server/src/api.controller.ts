@@ -13,7 +13,11 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
   // TODO body validation?
   const data = req.body;
 
-  mealValidation(data, res);
+  const valiRes = mealValidation(data);
+  if (valiRes[0] == false) {
+    res.status(valiRes[1]!).json(valiRes[2]);
+    return;
+  }
 
   //if ID exists
   for (let i = 0; i < myFakeServerDatabase.length; i++) {
@@ -26,8 +30,6 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
       };
 
       myFakeServerDatabase[i] = editedMeal;
-      //Fail Safe
-      //myFakeServerDatabase[i].id = id;
 
       res.status(200).json(myFakeServerDatabase[i]);
       saveDB();
@@ -75,35 +77,39 @@ export function getAllMeals(req: Request, res: Response) {
 export const addMeal = (req: Request, res: Response) => {
   const data = req.body;
 
-  mealValidation(data, res);
+  const valiRes = mealValidation(data);
+  if (valiRes[0] == false) {
+    res.status(valiRes[1]!).json(valiRes[2]);
+    return;
+  }
 
   let newmeal = createMeal(data);
-
   myFakeServerDatabase.push(newmeal);
   saveDB();
+
   res.status(201).json(newmeal);
 };
 
-function mealValidation(data: any, res: Response<any, Record<string, any>>) {
+function mealValidation(data: any): [boolean, number?, string?] {
   const validationBody: MealDTO = data;
 
   if (!validationBody.name) {
-    res.status(400).send("name is required");
+    return [false, 400, "name is required"];
   }
 
   if (!validationBody.calories) {
-    res.status(400).send("calories is required");
+    return [false, 400, "calories is required"];
   }
   if (isNaN(Number(validationBody.calories))) {
-    res.status(400).send("calories must be a number");
+    return [false, 400, "calories must be a number"];
   }
-
-  console.log(Number(validationBody.calories));
 
   if (!validationBody.protein) {
-    res.status(400).send("protein is required");
+    return [false, 400, "protein is required"];
   }
   if (isNaN(Number(validationBody.protein))) {
-    res.status(400).send("protein must be a number");
+    return [false, 400, "protein must be a number"];
   }
+
+  return [true];
 }

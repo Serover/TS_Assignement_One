@@ -1,6 +1,6 @@
 import "./style.css";
 
-import { fetchAllMeals, generateFoodUI, editMeal, createMeal } from "./food";
+import { fetchAllMeals, generateFoodUI } from "./food";
 import {
   handleFormSubmit,
   toDoForm,
@@ -30,6 +30,4 @@ function bindAddMealButton() {
 
 main();
 
-//TODO, cleanup comments
 //TODO fix naming in html, aka todo -> search / meal
-//TODO error handling??

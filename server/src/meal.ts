@@ -21,10 +21,7 @@ export async function initalizeDB() {
 
   // cba validate the json save file
   if (jsonString.length > 0) {
-    console.log(jsonString);
-
     let data = JSON.parse(jsonString);
-
     myFakeServerDatabase = data;
   }
 }

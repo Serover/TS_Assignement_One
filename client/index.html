@@ -22,7 +22,6 @@
       </form>
     </div>
 
-    <!-- //<div> </div> -->
     <button type="submit" class="openForm">Add Meal</button>
 
     <div class="form-popup">
@@ -30,13 +29,23 @@
         <h1>Meal</h1>
 
         <label for="MealName"><b>name</b></label>
-        <input type="text" placeholder="Enter name" name="name" />
+        <input type="text" placeholder="Enter name" name="name" required />
 
         <label for="protein"><b>protein</b></label>
-        <input type="number" placeholder="Enter protein" name="protein" />
+        <input
+          type="number"
+          placeholder="Enter protein"
+          name="protein"
+          required
+        />
 
         <label for="calories"><b>calories</b></label>
-        <input type="number" placeholder="Enter calories" name="calories" />
+        <input
+          type="number"
+          placeholder="Enter calories"
+          name="calories"
+          required
+        />
 
         <div class="addtodo-button-container">
           <button type="submit" class="submitTodo">Submit</button>
