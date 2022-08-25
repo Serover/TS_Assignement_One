@@ -31,6 +31,28 @@ export async function saveDB() {
   await fs.writeFile(dir, jsonData);
 }
 
+export function isMealDTO(body: any): body is MealDTO {
+  if (!body.name) {
+    throw new Error("name is required in meal");
+  }
+
+  if (!body.calories) {
+    throw new Error("calories is required");
+  }
+  if (isNaN(Number(body.calories))) {
+    throw new Error("calories must be a number");
+  }
+
+  if (!body.protein) {
+    throw new Error("protein is required");
+  }
+  if (isNaN(Number(body.protein))) {
+    throw new Error("protein must be a number");
+  }
+
+  return true;
+}
+
 export function createMeal(meal: MealDTO) {
   let uniqueIdMeal: Meal = {
     id: 0,
