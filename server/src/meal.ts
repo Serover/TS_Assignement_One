@@ -60,6 +60,7 @@ export function createMeal(meal: MealDTO) {
     protein: +meal.protein,
     calories: +meal.calories,
   };
+
   // Very naive unique ID but works due to small reasons such as
   // last object is always the largest object in this case
   if (myFakeServerDatabase.length > 0) {

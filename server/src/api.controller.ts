@@ -1,9 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import {
   createMeal,
   myFakeServerDatabase,
   saveDB,
-  MealDTO,
   Meal,
   isMealDTO,
 } from "./meal";
@@ -45,7 +44,6 @@ export function updateMeal(req: Request<{ id: string }>, res: Response) {
 export function deleteMeal(req: Request<{ id: string }>, res: Response) {
   const id: number = +req.params.id;
 
-  //if ID exists
   for (let i = 0; i < myFakeServerDatabase.length; i++) {
     if (id === myFakeServerDatabase[i].id) {
       const deletedData = myFakeServerDatabase[i];
