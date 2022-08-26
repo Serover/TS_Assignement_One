@@ -49,4 +49,4 @@ har t.o.m funktionerna för att göra det lätt x). (Clean + Render)
 Det finns inget flow i navigeringen av frontended ( inget krav 🙃)
 (Mer specifikt, man söker på ID, men det finns inget sätt att ta reda på vad för Id vad för maträtt har och dom har inte logiska IDn pga jag gjorde en väldigt lazy unique ID implementation + inget sätt att ta sig tillbaka förutom att ladda om sidan)
 
-I vanliga fall hade man no velat söka på en form med optional inserts, dvs man kan söka på namn, calorier, och protein , ev med en range, eller inbygd range å ge tbx resultaten som passar osv osv.
+I vanliga fall hade man nog velat söka på en form med optional inserts, dvs man kan söka på namn, calorier, och protein , ev med en range, eller inbygd range å ge tbx resultaten som passar osv osv.
